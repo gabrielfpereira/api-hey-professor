@@ -16,14 +16,6 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -47,19 +39,19 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $questionDTO = new \App\DTOs\QuestionDTO(
+            question: $request->input('question'),
+            status: $request->input('status'),
+        );
+
+        $question = app(\App\Actions\Questions\UpdateQuestion::class)
+            ->handle($questionDTO, $question);
+
+        return response()->json($question, Response::HTTP_OK);
     }
 
     /**

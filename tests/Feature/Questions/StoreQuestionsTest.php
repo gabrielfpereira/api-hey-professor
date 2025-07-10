@@ -14,8 +14,8 @@ it('can store questions', function () {
     $response->assertCreated();
     $this->assertDatabaseHas('questions', [
         'question' => 'Sample Question Title?',
-        'user_id' => $user->id,
-        'status' => 'draft', // Assuming the default status is 'draft'
+        'user_id'  => $user->id,
+        'status'   => 'draft', // Assuming the default status is 'draft'
     ]);
 });
 

@@ -90,3 +90,20 @@ test("a pergunta deve ser atualizada com sucesso", function () {
     $response->assertOk();
     expect($question->fresh()->question)->toBe('Nova pergunta ?');
 });
+
+test("a pergunta deve estar em draft quando atualizada", function () {
+
+    $user     = User::factory()->create();
+    $question = Question::factory()->create(['user_id' => $user->id, 'status' => 'published']);
+
+    Sanctum::actingAs($user);
+
+    $response = $this->putJson('/api/questions/' . $question->id, [
+        'question' => 'Nova pergunta ?',
+    ]);
+
+    $response->assertJsonValidationErrors(['status']);
+    $response->assertUnprocessable();
+    expect($question->fresh()->status)->toBe('published');
+    expect($question->fresh()->question)->toBe($question->question);
+});

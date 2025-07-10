@@ -24,13 +24,18 @@ class UpdateQuestion
     {
         return Validator::make($data, [
             'question' => 'required|string|min:10|ends_with:?',
+            'status'   => function ($attribute, $value, $fail) {
+                if (trim($value) != 'draft') {
+                    $fail('The ' . $attribute . ' must be draft.');
+                }
+            },
         ])->validate();
     }
 
     private function authorize(Question $question): void
     {
-        if (Auth::id() !== $question->user_id) {
-            abort(Response::HTTP_FORBIDDEN, 'Você não tem permissão para atualizar esta questão.');
+        if (!Auth::user()->can('update', $question)) {
+            abort(Response::HTTP_FORBIDDEN, 'You do not have permission to update this question.');
         }
     }
 }

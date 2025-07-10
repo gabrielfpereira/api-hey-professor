@@ -45,7 +45,7 @@ class QuestionController extends Controller
     {
         $questionDTO = new \App\DTOs\QuestionDTO(
             question: $request->input('question'),
-            status: $request->input('status'),
+            status: $question->status,
         );
 
         $question = app(\App\Actions\Questions\UpdateQuestion::class)

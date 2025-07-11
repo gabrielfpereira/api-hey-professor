@@ -59,6 +59,9 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        app(\App\Actions\Questions\DeleteQuestion::class)
+            ->handle($question);
+
+        return response()->noContent();
     }
 }

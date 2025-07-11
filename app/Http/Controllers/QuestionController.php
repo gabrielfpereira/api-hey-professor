@@ -64,4 +64,15 @@ class QuestionController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Archive the specified question.
+     */
+    public function archive(Question $question)
+    {
+        app(\App\Actions\Questions\ArchiveQuestion::class)
+            ->handle($question);
+
+        return response()->noContent();
+    }
 }

@@ -27,7 +27,8 @@ class QuestionPolicy
      */
     public function restore(User $user, Question $question): bool
     {
-        return false;
+        return $user->id === $question->user_id;
+        ;
     }
 
     /**
@@ -35,6 +36,6 @@ class QuestionPolicy
      */
     public function forceDelete(User $user, Question $question): bool
     {
-        return false;
+        return $user->id === $question->user_id;
     }
 }

@@ -1,50 +1,50 @@
 <?php
 
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
-test("email é um campo obrigatório", function(){
+test("email é um campo obrigatório", function () {
 
     $this->postJson(route('register'), [
-        'name' => 'John Doe',
-        'email' => '',
+        'name'     => 'John Doe',
+        'email'    => '',
         'password' => 'password',
     ])
     ->assertJsonValidationErrors('email');
 });
 
-test("nome é um campo obrigatório", function(){
+test("nome é um campo obrigatório", function () {
     $this->postJson(route('register'), [
-        'name' => '',
-        'email' => 'john@example.com',
+        'name'     => '',
+        'email'    => 'john@example.com',
         'password' => 'password',
     ])
     ->assertJsonValidationErrors('name');
 });
 
-test("senha é um campo obrigatório", function(){
+test("senha é um campo obrigatório", function () {
     $this->postJson(route('register'), [
-        'name' => 'John Doe',
-        'email' => 'john@example.com',
+        'name'     => 'John Doe',
+        'email'    => 'john@example.com',
         'password' => '',
     ])
     ->assertJsonValidationErrors('password');
 });
 
-test("senha deve ser maior que 8 caracteres", function(){
+test("senha deve ser maior que 8 caracteres", function () {
     $this->postJson(route('register'), [
-        'name' => 'John Doe',
-        'email' => 'john@example.com',
+        'name'     => 'John Doe',
+        'email'    => 'john@example.com',
         'password' => 'pass',
     ])
     ->assertJsonValidationErrors('password');
 });
 
-test("senha deve ser salva em hash", function(){
+test("senha deve ser salva em hash", function () {
     $this->postJson(route('register'), [
-        'name' => 'John Doe',
-        'email' => 'john@example.com',
+        'name'     => 'John Doe',
+        'email'    => 'john@example.com',
         'password' => 'password',
     ])
     ->assertStatus(Response::HTTP_CREATED);

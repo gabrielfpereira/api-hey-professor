@@ -25,6 +25,5 @@ Route::group([
     //Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
     //Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
     //Route::post('refresh', [App\Http\Controllers\Auth\RefreshController::class, 'refresh']);
-    
-});
 
+});

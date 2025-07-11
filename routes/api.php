@@ -11,4 +11,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('questions', App\Http\Controllers\QuestionController::class);
     Route::delete('/questions/{question}/archive', [App\Http\Controllers\QuestionController::class, 'archive'])
         ->name('questions.archive');
+    Route::put('/questions/{question}/archive', [App\Http\Controllers\QuestionController::class, 'restore'])
+        ->name('questions.restore');
 });

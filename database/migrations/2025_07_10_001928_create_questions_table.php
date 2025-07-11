@@ -15,6 +15,7 @@ return new class () extends Migration {
             $table->text('question');
             $table->foreignId('user_id')->constrained();
             $table->string('status')->default('draft'); // draft, published, archived
+            $table->softDeletes(); // Para arquivar a questão
             $table->timestamps();
         });
     }

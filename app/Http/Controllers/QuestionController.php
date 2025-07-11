@@ -75,4 +75,15 @@ class QuestionController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Publish the specified question.
+     */
+    public function publish(Question $question)
+    {
+        app(\App\Actions\Questions\PublishQuestion::class)
+            ->handle($question);
+
+        return response()->noContent();
+    }
 }

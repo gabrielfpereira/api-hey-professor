@@ -38,4 +38,9 @@ class QuestionPolicy
     {
         return $user->id === $question->user_id;
     }
+
+    public function publish(User $user, Question $question): bool
+    {
+        return $user->id === $question->user_id && $question->status == 'draft';
+    }
 }

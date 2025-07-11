@@ -22,8 +22,13 @@ Route::group([
 ], function () {
     Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])
         ->name('register');
-    //Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+    Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login'])
+        ->name('login');
     //Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
     //Route::post('refresh', [App\Http\Controllers\Auth\RefreshController::class, 'refresh']);
 
 });
+
+Route::get('/dashboard', function () {
+    return response()->json(['message' => 'Dashboard']);
+})->middleware('auth:sanctum');

@@ -16,3 +16,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('questions/{question}/publish', [\App\Http\Controllers\QuestionController::class, 'publish'])
         ->name('questions.publish');
 });
+
+Route::group([
+    'prefix' => 'auth',
+], function () {
+    Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])
+        ->name('register');
+    //Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+    //Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
+    //Route::post('refresh', [App\Http\Controllers\Auth\RefreshController::class, 'refresh']);
+    
+});
+

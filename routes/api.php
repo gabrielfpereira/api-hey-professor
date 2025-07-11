@@ -24,11 +24,14 @@ Route::group([
         ->name('register');
     Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login'])
         ->name('login');
-    //Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
+    Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout'])
+        ->name('logout')
+        ->middleware('auth:sanctum');
     //Route::post('refresh', [App\Http\Controllers\Auth\RefreshController::class, 'refresh']);
 
 });
 
-Route::get('/dashboard', function () {
-    return response()->json(['message' => 'Dashboard']);
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->get('/dashboard', function () {
+    //dd(auth()->guard('sanctum')->user(), auth()->user());
+    return response()->json(['message' => 'Área protegida']);
+});

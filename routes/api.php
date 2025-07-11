@@ -27,8 +27,6 @@ Route::group([
     Route::post('logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout'])
         ->name('logout')
         ->middleware('auth:sanctum');
-    //Route::post('refresh', [App\Http\Controllers\Auth\RefreshController::class, 'refresh']);
-
 });
 
 Route::middleware('auth:sanctum')->get('/dashboard', function () {

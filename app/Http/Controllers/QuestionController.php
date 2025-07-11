@@ -12,7 +12,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $questions = app(\App\Actions\Questions\IndexQuestion::class)
+            ->handle(request());
+
+        return response()->json($questions, Response::HTTP_OK);
     }
 
     /**

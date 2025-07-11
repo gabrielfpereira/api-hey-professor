@@ -75,4 +75,15 @@ class QuestionController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Restore the specified question.
+     */
+    public function restore(int $question)
+    {
+        app(\App\Actions\Questions\RestoreQuestion::class)
+            ->handle($question);
+
+        return response()->noContent();
+    }
 }

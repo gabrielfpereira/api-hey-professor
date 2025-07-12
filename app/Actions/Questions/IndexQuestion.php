@@ -11,6 +11,9 @@ class IndexQuestion
     {
         $questions = Question::query()
         ->with('votes')
+        ->when($request->has('search'), function ($query) use ($request) {
+            $query->where('question', 'like', "%{$request->input('search')}%");
+        })
         ->when($request->has('status'), function ($query) use ($request) {
             if ($request->status === 'owner') {
                 $query->where('user_id', $request->user()->id);

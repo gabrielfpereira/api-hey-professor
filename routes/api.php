@@ -16,8 +16,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('questions/{question}/publish', [\App\Http\Controllers\QuestionController::class, 'publish'])
         ->name('questions.publish');
 
-    Route::post('/votes/{question}', [App\Http\Controllers\VoteController::class, 'store'])
-        ->name('votes.store');
+    Route::post('/votes/{question}/like', [App\Http\Controllers\VoteController::class, 'store'])
+        ->name('votes.like');
+    Route::post('/votes/{question}/unlike', [App\Http\Controllers\VoteController::class, 'store'])
+        ->name('votes.unlike');
 });
 
 Route::group([

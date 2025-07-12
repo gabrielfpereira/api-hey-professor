@@ -10,6 +10,7 @@ class IndexQuestion
     public function handle(Request $request)
     {
         $questions = Question::query()
+        ->with('votes')
         ->when($request->has('status'), function ($query) use ($request) {
             if ($request->status === 'owner') {
                 $query->where('user_id', $request->user()->id);
@@ -25,6 +26,8 @@ class IndexQuestion
         }, function ($query) {
             $query->where('status', 'published');
         })
+        ->withSumVotesLike()
+        ->withSumVotesUnlike()
         ->get();
 
         return $questions;

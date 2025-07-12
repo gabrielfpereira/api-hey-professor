@@ -15,6 +15,9 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('questions.restore');
     Route::put('questions/{question}/publish', [\App\Http\Controllers\QuestionController::class, 'publish'])
         ->name('questions.publish');
+
+    Route::post('/votes/{question}', [App\Http\Controllers\VoteController::class, 'store'])
+        ->name('votes.store');
 });
 
 Route::group([

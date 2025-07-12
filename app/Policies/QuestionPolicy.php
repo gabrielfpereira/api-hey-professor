@@ -43,4 +43,12 @@ class QuestionPolicy
     {
         return $user->id === $question->user_id && $question->status == 'draft';
     }
+
+    public function vote(User $user, Question $question): bool
+    {
+        return $user->votes()
+            ->where('question_id', $question->id)
+            ->exists() === false
+            && $user->id !== $question->user_id;
+    }
 }

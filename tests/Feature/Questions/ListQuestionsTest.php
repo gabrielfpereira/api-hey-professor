@@ -108,3 +108,20 @@ test("listar somente perguntas do usuario logado", function () {
         'question' => $questionOtherUser->question,
     ]);
 });
+
+test('as perguntas devem ser listadas por ordem de votos em like', function () {
+    $user      = \App\Models\User::factory()->create();
+    $question1 = \App\Models\Question::factory()->create(['status' => 'published']);
+    $question2 = \App\Models\Question::factory()->create(['status' => 'published']);
+    $question2->votes()->create(['user_id' => $user->id, 'value' => 1]);
+
+    Sanctum::actingAs($user);
+
+    $response = $this->getJson(route('questions.index'));
+    $response->assertOk();
+
+    $questions = $response->json();
+    expect($questions[0]['id'])->toBe($question2->id);
+    expect($questions[1]['id'])->toBe($question1->id);
+
+});

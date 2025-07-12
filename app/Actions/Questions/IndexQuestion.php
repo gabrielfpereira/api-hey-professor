@@ -31,6 +31,7 @@ class IndexQuestion
         })
         ->withSumVotesLike()
         ->withSumVotesUnlike()
+        ->orderBy('sum_votes_like', 'desc')
         ->get();
 
         return $questions;
